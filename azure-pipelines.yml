@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'macos-10.13'
+  vmImage: 'macos-latest'
 
 steps:
 - script: |
@@ -16,8 +16,8 @@ steps:
   displayName: 'Install Pods'
 
 - script: |
-    /usr/bin/xcodebuild >-
-      -sdk iphoneos11.0
+    /Applications/Xcode_10.3.app/Contents/Developer/usr/bin/xcodebuild >-
+      -sdk iphonesimulator12.4
       -configuration Release
       -workspace $(Build.Repository.LocalPath)/DVIA-v2/DVIA-v2.xcworkspace
       -scheme DVIA-v2
