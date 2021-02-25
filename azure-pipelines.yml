@@ -15,12 +15,5 @@ steps:
     pod install
   displayName: 'Install Pods'
 
-- task: Xcode@5
-  inputs:
-    actions: 'build'
-    configuration: 'Release'
-    sdk: 'iphoneos'
-    xcWorkspacePath: '$(Build.Repository.LocalPath)/DVIA-v2/DVIA-v2.xcworkspace'
-    scheme: '$DVIA-v2'
-    packageApp: false
-    args: '-UseModernBuildSystem=NO'
+- script: |
+    /usr/bin/xcodebuild -sdk iphoneos -configuration Release -workspace $(Build.Repository.LocalPath)/DVIA-v2/DVIA-v2.xcworkspace -scheme DVIA-v2 build CODE_SIGNING_ALLOWED=NO -UseModernBuildSystem=NO
