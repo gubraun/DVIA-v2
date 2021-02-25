@@ -18,7 +18,6 @@ steps:
     bash cov-analysis-macosx-2020.06.sh -q --installation.dir=$(Agent.BuildDirectory)/cov-analysis-macosx-2020.06 --license.region=6 --license.agreement=agree --license.type.choice=0 --license.cov.path=$(Agent.BuildDirectory)/license.dat --component.cov-wizard=false --component.dotnet-sdk=false --component.skip.documentation=true 
     mv cov-analysis-macosx-2020.06 cov-analysis
     cp license.dat ./cov-analysis/bin
-  condition: ne(variables.CACHE_RESTORED, 'true')
   displayName: 'Install Coverity'
 
 - script: |
