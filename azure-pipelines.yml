@@ -18,8 +18,9 @@ steps:
 - task: Xcode@5
   inputs:
     actions: 'build'
-    scheme: 'DVIA-v2'
-    sdk: 'iphoneos'
     configuration: 'Release'
+    sdk: 'iphoneos'
     xcWorkspacePath: '$(Build.Repository.LocalPath)/DVIA-v2/DVIA-v2.xcworkspace'
-    xcodeVersion: 'default' # Options: 8, 9, 10, 11, default, specifyPath
+    scheme: '$DVIA-v2'
+    packageApp: false
+    args: '-UseModernBuildSystem=NO'
