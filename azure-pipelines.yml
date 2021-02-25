@@ -18,7 +18,7 @@ steps:
 - task: Xcode@5
   inputs:
     actions: 'build'
-    scheme: ''
+    scheme: 'DVIA-v2'
     sdk: 'iphoneos'
     configuration: 'Release'
     xcWorkspacePath: '$(Build.Repository.LocalPath)/DVIA-v2/DVIA-v2.xcworkspace'
