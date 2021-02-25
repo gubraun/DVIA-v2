@@ -16,7 +16,7 @@ steps:
   displayName: 'Install Pods'
 
 - script: |
-    /usr/bin/xcodebuild -sdk iphoneos -configuration Release -workspace $(Build.Repository.LocalPath)/DVIA-v2/DVIA-v2.xcworkspace -scheme couchbase-lite-ios clean build CODE_SIGNING_ALLOWED=NO -UseModernBuildSystem=NO
+    /usr/bin/xcodebuild -sdk iphoneos -configuration Release -workspace $(Build.Repository.LocalPath)/DVIA-v2/DVIA-v2.xcworkspace -scheme Bolts build CODE_SIGNING_ALLOWED=NO -UseModernBuildSystem=NO
 
 #Bolts
 #couchbase-lite-ios
