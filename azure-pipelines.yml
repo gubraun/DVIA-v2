@@ -9,6 +9,17 @@ trigger:
 pool:
   vmImage: 'macos-latest'
 
+# Copy and install Coverity analysis package (not not cached)
+- script: |
+    cd $(Agent.BuildDirectory)
+    curl -s -L --user admin:$(COVERITY_AUTHKEY) -o license.dat $(COVERITY_URL)/downloadFile.htm?fn=license.dat
+    curl -s -L --user admin:$(COVERITY_AUTHKEY) -o cov-analysis-macosx-2020.06.sh $(COVERITY_URL)/downloadFile.htm?fn=cov-analysis-macosx-2020.06.sh
+    bash cov-analysis-macosx-2020.06.sh -q --installation.dir=$(Agent.BuildDirectory)/cov-analysis-macosx-2020.06 --license.region=6 --license.agreement=agree --license.type.choice=0 --license.cov.path=$(Agent.BuildDirectory)/license.dat --component.cov-wizard=false --component.dotnet-sdk=false --component.skip.documentation=true 
+    mv cov-analysis-macosx-2020.06 cov-analysis
+    cp license.dat ./cov-analysis/bin
+  condition: ne(variables.CACHE_RESTORED, 'true')
+  displayName: 'Install Coverity'
+
 steps:
 - script: |
     $(COVERITY_TOOL_HOME)/bin/cov-configure --swift
