@@ -59,3 +59,16 @@ steps:
     $(COVERITY_TOOL_HOME)/bin/cov-build --dir $(Build.Repository.LocalPath)/idir --fs-capture-search $(Build.Repository.LocalPath)/DVIA-v2 /Applications/Xcode_10.3.app/Contents/Developer/usr/bin/xcodebuild -sdk iphonesimulator12.4 -configuration Release -workspace $(Build.Repository.LocalPath)/DVIA-v2/DVIA-v2.xcworkspace -scheme DVIA-v2 build CODE_SIGNING_ALLOWED=NO
     $(COVERITY_TOOL_HOME)/bin/cov-analyze --dir $(Build.Repository.LocalPath)/idir --strip-path $(Build.Repository.LocalPath) --distrust-all --enable-audit-mode
 
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.Repository.LocalPath)/idir/'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+# Artifacts can be downloaded via web - see top-level log for Job
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    publishLocation: 'pipeline'
