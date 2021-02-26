@@ -56,10 +56,9 @@ steps:
   displayName: 'Install Pods'
 
 - script: |
+    export COVERITY_EMIT_UNSUPPORTED_SWIFT_VERSION=1
     $(COVERITY_TOOL_HOME)/bin/cov-build --dir $(Build.Repository.LocalPath)/idir --fs-capture-search $(Build.Repository.LocalPath)/DVIA-v2 /Applications/Xcode_10.3.app/Contents/Developer/usr/bin/xcodebuild -sdk iphonesimulator12.4 -configuration Release -workspace $(Build.Repository.LocalPath)/DVIA-v2/DVIA-v2.xcworkspace -scheme DVIA-v2 build CODE_SIGNING_ALLOWED=NO
     $(COVERITY_TOOL_HOME)/bin/cov-analyze --dir $(Build.Repository.LocalPath)/idir --strip-path $(Build.Repository.LocalPath) --distrust-all --enable-audit-mode
-  env:
-    COVERITY_EMIT_UNSUPPORTED_SWIFT_VERSION: 1
 
 - task: ArchiveFiles@2
   inputs:
